@@ -34,7 +34,7 @@ This project was built to:
 
 ## SQL Steps
 1. Create Database and Table.
-   `<img width="598" height="289" alt="SQL Create database and table script" src="https://github.com/user-attachments/assets/d9c7da30-cb90-41a4-a2e3-648203765afc" />`
+   <img width="598" height="289" alt="SQL Create database and table script" src="https://github.com/user-attachments/assets/d9c7da30-cb90-41a4-a2e3-648203765afc" />
 3. Imported the CSV into **MySQL** using .  
 4. Cleaned data and converted date formats.  
 5. Added new time-based columns:
@@ -56,7 +56,6 @@ user = "root"
 password = urllib.parse.quote_plus("MySqlPassword@1")  # escape @ or special chars
 host = "localhost:3306"
 db = "walmart_sales"
-
 engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{db}")
 
 # Read & insert in chunks
@@ -64,11 +63,10 @@ chunksize = 50000
 for chunk in pd.read_csv("C:/Users/Hp/Desktop/chunks/train.csv", chunksize=chunksize):
     # Convert TRUE/FALSE to 1/0
     chunk['Holiday_Flag'] = chunk['IsHoliday'].map({True:"TRUE", False:"FALSE", "TRUE":"TRUE", "FALSE":"FALSE"})
-
     
     # Drop the old IsHoliday column
     chunk.drop(columns=['IsHoliday'], inplace=True)
     
     # Insert chunk into MySQL
     chunk.to_sql(name="sales", con=engine, if_exists="append", index=False)
-    print(f"Inserted {len(chunk)} rows")
+    print(f"Inserted {len(chunk)} rows") ```
