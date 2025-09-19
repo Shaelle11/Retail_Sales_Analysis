@@ -34,10 +34,10 @@ This project was built to:
 
 ## SQL Steps
 1. Create Database and Table.
-   <img width="598" height="289" alt="SQL Create database and table script" src="https://github.com/user-attachments/assets/d9c7da30-cb90-41a4-a2e3-648203765afc" />
-2. Imported the CSV into **MySQL** using .  
-3. Cleaned data and converted date formats.  
-4. Added new time-based columns:
+   `<img width="598" height="289" alt="SQL Create database and table script" src="https://github.com/user-attachments/assets/d9c7da30-cb90-41a4-a2e3-648203765afc" />`
+3. Imported the CSV into **MySQL** using .  
+4. Cleaned data and converted date formats.  
+5. Added new time-based columns:
    - `Year`
    - `Month`
    - `Week`  
