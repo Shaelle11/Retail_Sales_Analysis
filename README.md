@@ -47,26 +47,26 @@ This project was built to:
 Because the dataset was too large for the MySQL wizard, I wrote a Python script with **pandas + SQLAlchemy + urllib.parse** to batch import in chunks of 50,000 rows.
 
 ```python data import script
-import pandas as pd
-from sqlalchemy import create_engine
-import urllib.parse
-
-# DB connection
-user = "root"
-password = urllib.parse.quote_plus("MySqlPassword@1")  # escape @ or special chars
-host = "localhost:3306"
-db = "walmart_sales"
-engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{db}")
-
-# Read & insert in chunks
-chunksize = 50000
-for chunk in pd.read_csv("C:/Users/Hp/Desktop/chunks/train.csv", chunksize=chunksize):
-    # Convert TRUE/FALSE to 1/0
-    chunk['Holiday_Flag'] = chunk['IsHoliday'].map({True:"TRUE", False:"FALSE", "TRUE":"TRUE", "FALSE":"FALSE"})
-    
-    # Drop the old IsHoliday column
-    chunk.drop(columns=['IsHoliday'], inplace=True)
-    
-    # Insert chunk into MySQL
-    chunk.to_sql(name="sales", con=engine, if_exists="append", index=False)
-    print(f"Inserted {len(chunk)} rows") ```
+      import pandas as pd
+      from sqlalchemy import create_engine
+      import urllib.parse
+      
+      # DB connection
+      user = "root"
+      password = urllib.parse.quote_plus("MySqlPassword@1")  # escape @ or special chars
+      host = "localhost:3306"
+      db = "walmart_sales"
+      engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{db}")
+      
+      # Read & insert in chunks
+      chunksize = 50000
+      for chunk in pd.read_csv("C:/Users/Hp/Desktop/chunks/train.csv", chunksize=chunksize):
+          # Convert TRUE/FALSE to 1/0
+          chunk['Holiday_Flag'] = chunk['IsHoliday'].map({True:"TRUE", False:"FALSE", "TRUE":"TRUE", "FALSE":"FALSE"})
+          
+          # Drop the old IsHoliday column
+          chunk.drop(columns=['IsHoliday'], inplace=True)
+          
+          # Insert chunk into MySQL
+          chunk.to_sql(name="sales", con=engine, if_exists="append", index=False)
+          print(f"Inserted {len(chunk)} rows") ```
