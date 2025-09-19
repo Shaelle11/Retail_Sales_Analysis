@@ -1,5 +1,3 @@
-# Retail Sales Analytics Project
-
 ## Project Overview
 This project demonstrates an **end-to-end data analytics pipeline** using **SQL, Excel, and Power BI**.  
 We analyze Walmart’s retail sales dataset to uncover insights into sales trends, seasonality, and the impact of holidays.
@@ -53,7 +51,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import urllib.parse
 
-# --- DB connection ---
+# DB connection
 user = "root"
 password = urllib.parse.quote_plus("MySqlPassword@1")  # escape @ or special chars
 host = "localhost:3306"
@@ -61,7 +59,7 @@ db = "walmart_sales"
 
 engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{db}")
 
-# --- Read & insert in chunks ---
+# Read & insert in chunks
 chunksize = 50000
 for chunk in pd.read_csv("C:/Users/Hp/Desktop/chunks/train.csv", chunksize=chunksize):
     # Convert TRUE/FALSE to 1/0
